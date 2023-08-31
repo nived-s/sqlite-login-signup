@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../services/auth_service_login.dart';
+
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<void> _login(BuildContext context) async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    bool isAuthenticated =
+        await AuthenticationService.authenticateUser(email, password);
+
+    if (isAuthenticated) {
+      // Navigate to the home screen
+      Navigator.pushReplacementNamed(context, '/home',
+          arguments: {'email': email});
+    } else {
+      // Show a snackbar with an error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Wrong email or password. Please try again.'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +47,11 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             TextFormField(
+              controller: emailController,
               decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextFormField(
+              controller: passwordController,
               decoration: const InputDecoration(labelText: 'Password'),
             ),
             const SizedBox(height: 16),
@@ -35,12 +63,7 @@ class LoginPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Simulate a successful login
-                // Replace this with your actual login logic
-                String enteredUsername =
-                    "username"; // Replace with actual username
-                Navigator.pushReplacementNamed(context, '/home',
-                    arguments: {'username': enteredUsername});
+                _login(context);
               },
               child: const Text('Login'),
             ),

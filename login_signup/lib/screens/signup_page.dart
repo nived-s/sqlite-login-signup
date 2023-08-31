@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup/screens/home_screen.dart';
 
-import '../services/auth_service.dart';
+import '../services/auth_service_signup.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -18,9 +18,6 @@ class SignupPage extends StatelessWidget {
     await AuthService.signup(email, password);
 
     // Navigate to the home screen and pass the email as an argument
-    // Navigator.pushReplacementNamed(context, '/home',
-    //     arguments: {'email': email});
-
     Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => HomeScreen(email: email)));
   }

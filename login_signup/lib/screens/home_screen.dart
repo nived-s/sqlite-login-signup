@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     text: email,
-                    style: const TextStyle(fontSize: 28, color: Colors.blue), // Apply different color to email
+                    style: const TextStyle(fontSize: 28, color: Colors.blue), 
                   ),
                 ],
               ),
