@@ -5,6 +5,8 @@ import 'screens/login_page.dart';
 import 'screens/signup_page.dart';
 import 'services/database_helper.dart';
 
+// sqflite and path packages are used
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseHelper.instance.database; // Initialize the database
